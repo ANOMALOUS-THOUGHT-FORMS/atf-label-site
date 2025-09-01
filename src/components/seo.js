@@ -15,6 +15,7 @@ function Seo({ description, title, children }) {
         site {
           siteMetadata {
             title
+            shortName
             description
             author
           }
@@ -24,7 +25,7 @@ function Seo({ description, title, children }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const defaultTitle = site.siteMetadata?.shortName
 
   return (
     <>

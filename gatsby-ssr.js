@@ -7,6 +7,24 @@
 /**
  * @type {import('gatsby').GatsbySSR['onRenderBody']}
  */
-exports.onRenderBody = ({ setHtmlAttributes }) => {
-  setHtmlAttributes({ lang: `en` })
-}
+// gatsby-ssr.js
+import React from "react";
+
+export const onRenderBody = ({ setPreBodyComponents }) => {
+  setPreBodyComponents([
+    <script
+      key="atf-theme-init"
+      dangerouslySetInnerHTML={{
+        __html: `
+(function(){
+  try{
+    var t = localStorage.getItem('atf-theme') || 'decoherence-zone';
+    document.documentElement.setAttribute('data-theme', t);
+  }catch(e){}
+})();`,
+      }}
+    />,
+  ]);
+};
+
+

@@ -1,18 +1,31 @@
-/**
- * Implement Gatsby's Node APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
- */
+const path = require("path");
 
-/**
- * @type {import('gatsby').GatsbyNode['createPages']}
- */
-exports.createPages = async ({ actions }) => {
-  const { createPage } = actions
-  createPage({
-    path: "/using-dsg",
-    component: require.resolve("./src/templates/using-dsg.js"),
-    context: {},
-    defer: true,
-  })
-}
+exports.createPages = async ({ graphql, actions }) => {
+  const { createPage } = actions;
+  const template = path.resolve("src/templates/thought-form.js");
+
+  const result = await graphql(`
+    {
+      allMarkdownRemark(
+        filter: { fileAbsolutePath: { regex: "/thought-forms/" } }
+      ) {
+        nodes {
+          frontmatter {
+            release
+          }
+        }
+      }
+    }
+  `);
+
+  result.data.allMarkdownRemark.nodes.forEach(node => {
+    const number = String(node.frontmatter.release).padStart(3, "0"); // 1 -> 001
+    const slug = `/releases/ATF${number}`;
+
+    createPage({
+      path: slug,
+      component: template,
+      context: { release: node.frontmatter.release },
+    });
+  });
+};

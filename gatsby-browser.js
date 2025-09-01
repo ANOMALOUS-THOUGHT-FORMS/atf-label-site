@@ -5,3 +5,5 @@
  */
 
 // You can delete this file if you're not using it
+import "./src/styles/theme.css";
+import "./src/styles/styles.css";

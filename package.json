@@ -1,18 +1,21 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "anomalous-thought-forms",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "The home for the ANOMALOUS THOUGHT FORMS label.",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Future Wip",
   "dependencies": {
     "gatsby": "^5.14.6",
+    "gatsby-omni-font-loader": "^2.0.2",
     "gatsby-plugin-image": "^3.14.0",
     "gatsby-plugin-manifest": "^5.14.0",
     "gatsby-plugin-sharp": "^5.14.0",
-    "gatsby-source-filesystem": "^5.14.0",
+    "gatsby-source-filesystem": "^5.15.0",
+    "gatsby-transformer-remark": "^6.15.0",
     "gatsby-transformer-sharp": "^5.14.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "prettier": "^2.8.8"

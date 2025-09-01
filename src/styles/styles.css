@@ -1,0 +1,292 @@
+ html,body{height:100%}
+body{background:var(--bg); color:var(--text); margin:0; font:16px/1.5 ui-sans-serif,system-ui,Arial}
+h1{margin:0; font-size:clamp(2.25rem,5vw,4rem)}
+.tagline{max-width:58ch; margin:0 auto; opacity:.9}
+
+.splash {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* sigil at top, button at bottom */
+  align-items: center;
+  padding: 1.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* .sigil{width:520px; max-width:80vw; aspect-ratio:1/1; border-radius:50%; border:3px solid var(--line); display:grid; place-items:center; position:relative; overflow:hidden}
+.sigil::before{content:""; position:absolute; inset:15%; border-radius:50%; border:2px solid var(--line); box-shadow:0 0 40px -10px var(--accent)} */
+
+
+.cta{display:inline-block; padding:.85rem 1.2rem; border:2px solid var(--line); color:var(--text); text-decoration:none; border-radius:999px}
+.themePicker{position:fixed; right:12px; bottom:12px; display:flex; gap:.5rem; background:rgba(255,255,255,.4); backdrop-filter:saturate(1.2) blur(6px); padding:.5rem .6rem; border-radius:999px; border:1px solid #0001}
+.themePicker button{width:34px; height:34px; border-radius:50%; border:2px solid var(--line); background:var(--bg); cursor:pointer}
+body{ font-family: var(--font-body); }
+
+#main {
+    padding-bottom: 4rem;
+
+}
+
+.atf-title{
+  font-family: var(--font-head);
+  text-transform: uppercase;       /* ANOMALOUS THOUGHT FORMS */
+  letter-spacing: clamp(0.04em, 0.4vw, 0.1em);
+  font-weight: 700;
+  line-height: .95;
+  color: var(--text)
+}
+
+.frame{
+  display:grid;
+  gap:2rem;
+  justify-items:center;
+  text-align:center;
+}
+
+/* Sigil container */
+.sigil{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width: min(60vw, 350px);
+  aspect-ratio: 1 / 1;
+  flex-shrink: 1;
+}
+
+/* Sigil image */
+.sigil img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+
+.tf-sheet {
+  display: grid;
+  grid-template-columns: auto 1fr; /* rail takes min space, body flexes */
+  gap: 0;                           /* no gap, since rail has its own border */
+  max-width: 960px;
+  margin: 2rem auto;
+  border: 1px solid color-mix(in oklab, var(--line) 20%, transparent);
+  border-radius: 12px;
+  background: color-mix(in oklab, var(--bg) 96%, white);
+  
+}
+
+/* “Printed sheet” card */
+.tf-rail {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+  border-right: 2px solid color-mix(in oklab, var(--line) 25%, transparent);
+  background: transparent;
+  min-width: 80px;   /* 👈 ensures enough space so body text never overlaps */
+}
+
+.tf-headers {
+  display: flex;
+  flex-direction: row;
+  height: 80%;
+  padding: 0 1rem;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.tf-content {
+  padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 3rem);
+}
+/* header row */
+.tf-head{
+  display:flex; flex-direction: column; align-items:flex-start; gap:1rem;
+  border-bottom: 1px dashed color-mix(in oklab, var(--line) 30%, transparent);
+  padding-bottom: .75rem; margin-bottom: 1.25rem;
+}
+.tf-meta{
+  margin-left:auto; text-align:right; font-family: var(--font-body);
+  color: color-mix(in oklab, var(--text) 85%, black);
+  display:grid; gap:.2rem;
+  font-size: .85rem;
+}
+.tf-code{ font-weight:600; color: var(--heading, var(--text)); }
+.tf-edition{ opacity:.85; }
+.tf-id{ letter-spacing:.08em; color: color-mix(in oklab, var(--accent) 60%, var(--text)); }
+
+/* poem/body: keep it warm and readable */
+.tf-body{
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  /* preserve intent from markdown line breaks and avoid huge margins */
+}
+.tf-body p{ margin: 0 0 .6rem 0; }
+.tf-body br{ content: ""; display: block; margin-bottom: .2rem; }
+
+/* optional: a subtle “ruled paper” feel */
+.tf-body{
+
+  padding: .2rem .1rem;
+}
+
+/* footer with collect link */
+.tf-footer{
+  margin-top: 1.25rem;
+  display:flex; justify-content:flex-end;
+}
+.tf-collect{
+  display:inline-block;
+  border:2px solid var(--line);
+  color: var(--heading, var(--text));
+  text-decoration:none;
+  padding:.6rem .9rem;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: transform .12s ease, box-shadow .2s ease, background .2s ease;
+}
+.tf-collect:hover{
+  transform: translateY(-1px);
+  background: color-mix(in oklab, var(--accent) 18%, transparent);
+  box-shadow: 0 10px 24px -18px var(--line);
+}
+
+.tf-title {
+  display: none;
+}
+
+/* ensure side title doesn’t collide on narrow screens */
+@media (max-width: 700px){
+  .tf-rail{ display:none; } /* hide vertical title on tiny viewports */
+  .tf-sheet{ padding-left: clamp(1rem, 4vw, 2rem); }
+  .tf-title { display:block; } /* show main title instead */
+}
+
+/* Authors: smaller, lighter text */
+.tf-rail .tf-authors {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: var(--font-body, ui-sans-serif);
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: color-mix(in oklab, var(--text) 70%, var(--line) 30%);
+  opacity: 0.85;
+  margin: 0;
+  align-self: flex-end;
+}
+
+
+
+/* Title: larger, bolder, more prominent */
+.tf-rail .tf-title-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-family: var(--font-head, ui-serif);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  color: var(--heading, var(--text));
+  margin: 0;
+}
+
+
+
+
+/* Smaller, denser grid */
+.tf-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 👈 smaller */
+  gap: clamp(.75rem, 2vw, 1rem);
+  padding: clamp(.75rem, 2.5vw, 1.5rem);
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+/* A4 portrait, but compact */
+.tf-card{ text-decoration:none; color: inherit; }
+.tf-card__inner{
+  position:relative;
+  aspect-ratio: 1 / 1.4142;                 /* A4 ratio */
+  background: color-mix(in oklab, var(--bg) 95%, white);
+  border: 1px solid color-mix(in oklab, var(--line) 25%, transparent);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px -24px color-mix(in oklab, var(--line) 35%, transparent);
+  overflow:hidden;
+  transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease;
+  padding: .6rem .6rem .8rem;               /* small insets */
+  display:flex; align-items:flex-start;
+}
+.tf-card:hover .tf-card__inner,
+.tf-card:focus-visible .tf-card__inner{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 46px -28px color-mix(in oklab, var(--line) 45%, transparent);
+  border-color: color-mix(in oklab, var(--line) 45%, transparent);
+  outline:none;
+}
+
+/* Code badge */
+.tf-card__code{
+  position:absolute; top:.4rem; right:.4rem;
+  font-size: .75rem; letter-spacing:.06em;
+  font-family: var(--font-body);
+  color: color-mix(in oklab, var(--accent) 80%, black);
+  background: color-mix(in oklab, var(--bg) 88%, white);
+  border: 1px solid color-mix(in oklab, var(--line) 25%, transparent);
+  border-radius: 999px; padding: .15rem .45rem;
+}
+
+
+
+/* Hover/focus reveal title overlay */
+.tf-card__hover{
+  position:absolute; inset:0;
+  display:grid; place-items:center;
+  background: color-mix(in oklab, var(--inner) 18%, transparent);
+  opacity:0; transition: opacity .16s ease;
+}
+.tf-card:hover .tf-card__hover,
+.tf-card:focus-visible .tf-card__hover{ opacity:1; }
+
+.tf-card__title{
+  font-family: var(--font-head);
+  color: var(--heading, var(--text));
+  text-align:center; font-weight:700; letter-spacing:.04em;
+  font-size: clamp(.85rem, 1.4vw, 1.1rem);
+  background: color-mix(in oklab, var(--bg) 92%, white);
+  border: 1px solid color-mix(in oklab, var(--line) 25%, transparent);
+  border-radius: 8px; padding:.35rem .6rem; max-width:85%;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .tf-card__inner{ transition:none }
+  .tf-card__hover{ transition:none }
+}
+
+/* Centered sigil inside the card */
+.tf-card__sigil{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  pointer-events:none;               /* clicks pass through */
+}
+
+.tf-card__sigil img{
+  width: clamp(40%, 60%, 72%);       /* responsive sizing */
+  height: auto;
+  opacity: .14;                      /* subtle watermark feel */
+  filter: drop-shadow(0 2px 10px color-mix(in oklab, var(--line) 35%, transparent));
+  /* optional blending if you like: */
+  /* mix-blend-mode: multiply; */
+}
+
+/* On hover, you can bring the title overlay in and nudge sigil opacity */
+.tf-card:hover .tf-card__sigil img,
+.tf-card:focus-visible .tf-card__sigil img{
+  opacity: .18;
+}
