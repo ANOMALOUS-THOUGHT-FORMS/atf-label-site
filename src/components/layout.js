@@ -1,6 +1,6 @@
 // src/components/Layout.jsx
 import * as React from "react";
-import Header from "./Header";
+import Header from "./header";
 
 export default function Layout({ children, showHeader = true }) {
   return (
