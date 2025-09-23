@@ -290,3 +290,28 @@ body{ font-family: var(--font-body); }
 .tf-card:focus-visible .tf-card__sigil img{
   opacity: .18;
 }
+
+.tf-details {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-right: 20px;            /* pushes it left if Collect button is on the right */
+  font: inherit;                 /* inherit typeface + size */
+  color: color-mix(in oklab, var(--text) 85%, black);
+  cursor: pointer;
+  text-decoration: underline;    /* subtle link-like hint */
+  text-underline-offset: 2px;
+  opacity: 0.85;
+  transition: color .2s ease, opacit∂ty .2s ease;
+}
+
+.tf-details:hover,
+.tf-details:focus {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.tf-details:focus-visible {
+  outline: none;
+  text-decoration: underline dotted;  /* subtle accessibility focus */
+}
