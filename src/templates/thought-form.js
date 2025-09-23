@@ -19,7 +19,7 @@ export const Head = ({ data, location }) => {
     "genre": "Poem",
     "identifier": `ATF${number}`,
     "inLanguage": "en",
-    "datePublished": fm.date,
+    "datePublished": fm.created,
     "author": fm.authors ? { "@type": "Person", "name": fm.authors } : undefined,
     "isPartOf": {
       "@type": "CreativeWorkSeries",
@@ -163,7 +163,7 @@ export const query = graphql`
       frontmatter {
         title
         release
-        date(formatString: "MMMM DD, YYYY")
+        created(formatString: "MMMM DD, YYYY")
         authors
         collect
         theme
