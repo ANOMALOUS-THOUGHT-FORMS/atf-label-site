@@ -2,6 +2,7 @@ import * as React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import ThoughtFormBack from "../components/thought-form-back";
 
 export const Head = ({ data, location }) => {
   const post = data.markdownRemark;
@@ -50,14 +51,15 @@ export default function ThoughtForm({ data }) {
 
   const [isBack, setIsBack] = React.useState(false);
   const [articleHeight, setArticleHeight] = React.useState(0);
+  const articleRef = React.useRef(null);
+  const [articleH, setArticleH] = React.useState(0);
 
   // Optional: apply per-page theme
   React.useEffect(() => {
     if (fm.theme) document.documentElement.setAttribute("data-theme", fm.theme);
   }, [fm.theme]);
 
-  const articleRef = React.useRef(null);
-  const [articleH, setArticleH] = React.useState(0);
+
 
   React.useLayoutEffect(() => {
     const el = articleRef.current;
@@ -130,10 +132,12 @@ export default function ThoughtForm({ data }) {
 
         {/* collect button (only if frontmatter.collect exists) */}
         
-         {!isBack && <footer className="tf-footer">
+         <footer className="tf-footer">
             <button className="tf-details" onClick={() => {
               console.log(articleH, articleHeight);
-              setArticleHeight(articleH);
+              if (!articleHeight) {
+                setArticleHeight(articleH);
+              }
               setIsBack(true)
             }
               }>
@@ -142,15 +146,14 @@ export default function ThoughtForm({ data }) {
             {fm.collect && <a className="tf-collect" href={fm.collect} target="_blank" rel="noopener noreferrer">
               Collect ATF{number}
             </a>}
-        </footer>}
+        </footer>
         </div>
 
 
         
       </article>
       :     
-      <div className="tf-sheet tf-back" style={{ height: `${articleHeight}px`}}>
-        </div>
+      <ThoughtFormBack height={articleHeight} authorsNote={fm.authorsNote} created={fm.created} viewATF={() => setIsBack(false)}/>
       }
     </Layout>
   );
@@ -167,6 +170,7 @@ export const query = graphql`
         authors
         collect
         theme
+        authorsNote
       }
     }
   }
